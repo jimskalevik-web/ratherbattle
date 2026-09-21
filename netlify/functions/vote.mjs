@@ -25,8 +25,25 @@
 //   4. Legg denne fila i  netlify/functions/vote.mjs  i utrullingsmappa.
 //   5. I bygg.js: sett  VOTE_API = "/api/vote"  og bygg på nytt.
 
-const URL_BASE = process.env.UPSTASH_REDIS_REST_URL;
-const TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
+// Nøkler limt inn fra en .env-fil får ofte med seg anførselstegn, mellomrom
+// eller hele «NAVN=»-biten. Vask dem, så det virker uansett hvordan de kom inn.
+function vask(verdi) {
+  let v = String(verdi || "").trim();
+  v = v.replace(/^[A-Z_]+\s*=\s*/, "");          // UPSTASH_..._URL=...
+  v = v.replace(/^["'`]+|["'`]+$/g, "").trim();  // "..." eller '...'
+  return v;
+}
+const URL_BASE = vask(process.env.UPSTASH_REDIS_REST_URL).replace(/\/+$/, "");
+const TOKEN = vask(process.env.UPSTASH_REDIS_REST_TOKEN);
+
+// Forteller hva som er galt uten å avsløre selve nøkkelen.
+function diagnose(feil) {
+  const m = String((feil && feil.message) || feil || "");
+  if (!/^https:\/\/[^\s"']+\.upstash\.io$/.test(URL_BASE)) return "adressen ser feil ut (skal være https://….upstash.io)";
+  if (/401|403/.test(m)) return "databasen avviste nøkkelen (sjekk UPSTASH_REDIS_REST_TOKEN)";
+  if (/Redis svarte/.test(m)) return m;
+  return "fikk ikke kontakt med databasen";
+}
 
 // Må stemme med antallet dilemmaer i bygget. Hindrer at noen fyller databasen
 // med tilfeldige nøkler.
@@ -109,9 +126,9 @@ async function stem(request) {
     const resultat = await redis(kommandoer);
     const felt = resultat[1]?.result ?? [];
     return svarMed({ a: Number(felt[0]) || 0, b: Number(felt[1]) || 0 });
-  } catch {
+  } catch (e) {
     // Databasen nede er ikke en grunn til å ødelegge spillet.
-    return svarMed({ feil: "utilgjengelig" }, 503);
+    return svarMed({ feil: "utilgjengelig", grunn: diagnose(e) }, 503);
   }
 }
 
@@ -250,8 +267,8 @@ async function duell(request) {
       return svarMed({ feil: "mangler parameter" }, 400);
     }
     return svarMed({ feil: "kun GET og POST" }, 405);
-  } catch {
-    return svarMed({ feil: "utilgjengelig" }, 503);
+  } catch (e) {
+    return svarMed({ feil: "utilgjengelig", grunn: diagnose(e) }, 503);
   }
 }
 
@@ -305,8 +322,8 @@ async function puls() {
       siste_21_dager: siste,
       oppdatert: new Date().toISOString()
     }, 200, { "Cache-Control": "public, max-age=60" });
-  } catch {
-    return svarMed({ feil: "utilgjengelig" }, 503);
+  } catch (e) {
+    return svarMed({ feil: "utilgjengelig", grunn: diagnose(e) }, 503);
   }
 }
 
