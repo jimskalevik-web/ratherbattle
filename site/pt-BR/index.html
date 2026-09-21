@@ -6,7 +6,7 @@
   <title>RatherBattle</title>
   <meta name="description" content="3.041 dilemas, duas opções, zero tempo para pensar. Descubra se você responde como a maioria — ou na contramão. Desafie um amigo e veja o quanto vocês se parecem.">
   <!-- Byggemerke: gjør det mulig å se utenfra hvilken versjon som er publisert. -->
-  <meta name="rb-build" content="2026-09-21 08:17 · ingen-gjentak+temaer+puls">
+  <meta name="rb-build" content="2026-09-21 10:13 · ingen-gjentak+temaer+puls">
   <link rel="canonical" href="https://ratherbattle.com/pt-BR/">
   <link rel="alternate" hreflang="no" href="https://ratherbattle.com/no/">
   <link rel="alternate" hreflang="en" href="https://ratherbattle.com/en/">
@@ -37,6 +37,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="RatherBattle">
   <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2232%22%20fill%3D%22%23d94222%22%2F%3E%3Crect%20y%3D%2232%22%20width%3D%2264%22%20height%3D%2232%22%20fill%3D%22%230f7a6c%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2213%22%20fill%3D%22%23201c1a%22%2F%3E%3C%2Fsvg%3E">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon-180.png">
 
   <script defer data-domain="ratherbattle.com" src="https://plausible.io/js/script.tagged-events.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
@@ -996,6 +998,11 @@ var VDH_UI_NO = {
   duel_new_n: "{n} nye svar",
   duel_vs_stranger: "Mot en tilfeldig spiller",
   btn_new_random: "Møt en ny motstander",
+  card_install: "Legg appen på startskjermen",
+  install_desc: "Da ligger RatherBattle sammen med de andre appene dine, åpner i fullskjerm og husker hvor du slapp.",
+  btn_install: "Installer",
+  install_ios: "Trykk på Del-knappen i Safari (firkanten med pil opp), og velg «Legg til på Hjem-skjerm».",
+  install_done: "Lagt til på startskjermen ✓",
   card_challenge: "Utfordre en venn",
   challenge_desc: "Send en lenke til noen. De svarer på de samme ti dilemmaene uten å se hva du valgte — så får dere fasiten på hvor like dere er.",
   btn_make_code: "Lag utfordringskode", btn_copy_code: "Kopier koden",
@@ -1284,6 +1291,11 @@ var VDH_UI_EN = {
   duel_new_n: "{n} new answers",
   duel_vs_stranger: "Against a random player",
   btn_new_random: "Play someone new",
+  card_install: "Add the app to your home screen",
+  install_desc: "RatherBattle then sits with your other apps, opens full screen and remembers where you left off.",
+  btn_install: "Install",
+  install_ios: "Tap the Share button in Safari (the square with an arrow), then choose “Add to Home Screen”.",
+  install_done: "Added to your home screen ✓",
   card_challenge: "Challenge a friend",
   challenge_desc: "Send someone a link. They answer the same ten dilemmas without seeing your picks — then you both find out how alike you really are.",
   btn_make_code: "Create challenge code", btn_copy_code: "Copy the code",
@@ -1662,6 +1674,11 @@ var VDH_UI_ES = {
   duel_new_n: "{n} respuestas nuevas",
   duel_vs_stranger: "Contra un jugador al azar",
   btn_new_random: "Juega con alguien nuevo",
+  card_install: "Añade la app a tu pantalla de inicio",
+  install_desc: "Así RatherBattle queda junto a tus otras apps, se abre a pantalla completa y recuerda dónde lo dejaste.",
+  btn_install: "Instalar",
+  install_ios: "Toca el botón Compartir en Safari (el cuadrado con la flecha) y elige «Añadir a pantalla de inicio».",
+  install_done: "Añadida a tu pantalla de inicio ✓",
   card_challenge: "Reta a un amigo",
   challenge_desc: "Manda un enlace a alguien. Responden los mismos diez dilemas sin ver lo que elegiste, y así veis cuánto os parecéis de verdad.",
   btn_make_code: "Crear código de reto", btn_copy_code: "Copiar el código",
@@ -2040,6 +2057,11 @@ var VDH_UI_DE = {
   duel_new_n: "{n} neue Antworten",
   duel_vs_stranger: "Gegen einen zufälligen Spieler",
   btn_new_random: "Gegen jemand Neues spielen",
+  card_install: "App zum Home-Bildschirm hinzufügen",
+  install_desc: "Dann liegt RatherBattle neben deinen anderen Apps, öffnet im Vollbild und merkt sich, wo du aufgehört hast.",
+  btn_install: "Installieren",
+  install_ios: "Tippe in Safari auf Teilen (das Quadrat mit dem Pfeil) und wähle „Zum Home-Bildschirm“.",
+  install_done: "Zum Home-Bildschirm hinzugefügt ✓",
   card_challenge: "Fordere einen Freund heraus",
   challenge_desc: "Schick jemandem einen Link. Er beantwortet dieselben zehn Dilemmas, ohne deine Wahl zu sehen — danach seht ihr, wie ähnlich ihr wirklich seid.",
   btn_make_code: "Code erstellen", btn_copy_code: "Code kopieren",
@@ -2418,6 +2440,11 @@ var VDH_UI_FR = {
   duel_new_n: "{n} nouvelles réponses",
   duel_vs_stranger: "Contre un joueur au hasard",
   btn_new_random: "Affronter quelqu'un de nouveau",
+  card_install: "Ajouter l'app à l'écran d'accueil",
+  install_desc: "RatherBattle se range alors avec tes autres apps, s'ouvre en plein écran et se souvient où tu t'es arrêté.",
+  btn_install: "Installer",
+  install_ios: "Touche le bouton Partager dans Safari (le carré avec la flèche), puis choisis « Sur l'écran d'accueil ».",
+  install_done: "Ajoutée à l'écran d'accueil ✓",
   card_challenge: "Défie un ami",
   challenge_desc: "Envoie un lien à quelqu'un. Il répond aux mêmes dix dilemmes sans voir tes choix — ensuite vous voyez à quel point vous vous ressemblez.",
   btn_make_code: "Créer un code de défi", btn_copy_code: "Copier le code",
@@ -2796,6 +2823,11 @@ var VDH_UI_PT_BR = {
   duel_new_n: "{n} respostas novas",
   duel_vs_stranger: "Contra um jogador aleatório",
   btn_new_random: "Jogar com alguém novo",
+  card_install: "Adicione o app à tela inicial",
+  install_desc: "Assim o RatherBattle fica junto dos seus outros apps, abre em tela cheia e lembra onde você parou.",
+  btn_install: "Instalar",
+  install_ios: "Toque no botão Compartilhar do Safari (o quadrado com a seta) e escolha “Adicionar à Tela de Início”.",
+  install_done: "Adicionado à tela inicial ✓",
   card_challenge: "Desafie um amigo",
   challenge_desc: "Mande um link para alguém. A pessoa responde os mesmos dez dilemas sem ver suas escolhas — e aí vocês veem o quanto se parecem de verdade.",
   btn_make_code: "Criar código de desafio", btn_copy_code: "Copiar o código",
@@ -3174,6 +3206,11 @@ var VDH_UI_IT = {
   duel_new_n: "{n} nuove risposte",
   duel_vs_stranger: "Contro un giocatore a caso",
   btn_new_random: "Gioca contro qualcun altro",
+  card_install: "Aggiungi l'app alla schermata Home",
+  install_desc: "Così RatherBattle sta insieme alle tue altre app, si apre a schermo intero e ricorda dove eri rimasto.",
+  btn_install: "Installa",
+  install_ios: "Tocca il pulsante Condividi in Safari (il quadrato con la freccia) e scegli «Aggiungi alla schermata Home».",
+  install_done: "Aggiunta alla schermata Home ✓",
   card_challenge: "Sfida un amico",
   challenge_desc: "Manda un link a qualcuno. Risponderà agli stessi dieci dilemmi senza vedere le tue scelte, e poi vedrete quanto vi somigliate davvero.",
   btn_make_code: "Crea codice sfida", btn_copy_code: "Copia il codice",
@@ -3552,6 +3589,11 @@ var VDH_UI_SV = {
   duel_new_n: "{n} nya svar",
   duel_vs_stranger: "Mot en slumpmässig spelare",
   btn_new_random: "Möt en ny motståndare",
+  card_install: "Lägg appen på hemskärmen",
+  install_desc: "Då ligger RatherBattle bland dina andra appar, öppnas i helskärm och minns var du slutade.",
+  btn_install: "Installera",
+  install_ios: "Tryck på Dela-knappen i Safari (fyrkanten med pilen) och välj ”Lägg till på hemskärmen”.",
+  install_done: "Tillagd på hemskärmen ✓",
   card_challenge: "Utmana en vän",
   challenge_desc: "Skicka en länk till någon. De svarar på samma tio dilemman utan att se vad du valde — sen får ni facit på hur lika ni är.",
   btn_make_code: "Skapa utmaningskod", btn_copy_code: "Kopiera koden",
@@ -4753,6 +4795,7 @@ window.VDH_LOCALES["sv"] = {
         '<div class="contrarian-q">' + esc(t("quote", { text: contrarian.q })) + "</div>" +
         '<span class="contrarian-pct">' + esc(t("contrarian_pct", { pct: contrarian.pct })) + "</span>" +
       "</div>" +
+      installKort() +
       '<div class="reset-row"><button class="reset-btn" id="resetHistory" type="button">' + esc(t("reset")) + "</button></div>";
 
     var shareToast = document.getElementById("shareToast");
@@ -4769,6 +4812,7 @@ window.VDH_LOCALES["sv"] = {
       renderMatch();
       openPanel(matchPanel);
     });
+    bindInstall();
     document.getElementById("resetHistory").addEventListener("click", function () {
       history = [];
       writeHistory();
@@ -4923,6 +4967,78 @@ window.VDH_LOCALES["sv"] = {
     }
     openPanel(duelPanel);
   }
+
+  // ---------- installer på startskjermen ----------
+  // Telefonen kan installere sida som en app: eget ikon, fullskjerm, ingen
+  // nettleserlinje. Android sier fra når det er mulig; iPhone må få en
+  // forklaring, fordi Safari aldri tilbyr det av seg selv.
+  var installHendelse = null;
+  var installert = false;
+  function kjorerSomApp() {
+    try {
+      return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) ||
+        window.navigator.standalone === true;
+    } catch (e) { return false; }
+  }
+  function erIphone() {
+    var ua = navigator.userAgent || "";
+    return /iPhone|iPad|iPod/i.test(ua) && !/CriOS|FxiOS|EdgiOS/i.test(ua);
+  }
+  function egenSide() { return !!shareUrl(); }
+  function installKort() {
+    if (!egenSide() || kjorerSomApp()) return "";
+    if (installert) {
+      return '<div class="card"><h3>' + esc(t("card_install")) + "</h3><p>" + esc(t("install_done")) + "</p></div>";
+    }
+    if (installHendelse) {
+      return '<div class="card"><h3>' + esc(t("card_install")) + "</h3>" +
+        "<p>" + esc(t("install_desc")) + "</p>" +
+        '<div class="btn-row"><button class="btn btn-primary" id="installBtn" type="button">' +
+          esc(t("btn_install")) + "</button></div></div>";
+    }
+    if (erIphone()) {
+      return '<div class="card"><h3>' + esc(t("card_install")) + "</h3>" +
+        "<p>" + esc(t("install_desc")) + "</p>" +
+        '<p class="btn-sub" style="text-align:left">' + esc(t("install_ios")) + "</p></div>";
+    }
+    return "";
+  }
+  function bindInstall() {
+    var b = document.getElementById("installBtn");
+    if (!b || !installHendelse) return;
+    b.addEventListener("click", function () {
+      var h = installHendelse;
+      installHendelse = null;
+      track("installer_trykket");
+      try {
+        h.prompt();
+        h.userChoice.then(function (valg) {
+          if (valg && valg.outcome === "accepted") { installert = true; track("installert"); }
+          if (statsPanel.classList.contains("open")) renderStats();
+        }, function () {});
+      } catch (e) { /* ignore */ }
+    });
+  }
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    installHendelse = e;
+    if (statsPanel.classList.contains("open")) renderStats();
+  });
+  window.addEventListener("appinstalled", function () {
+    installert = true;
+    installHendelse = null;
+    track("installert");
+  });
+  // Service worker: holder appen i gang uten nett, men henter alltid nyeste
+  // versjon først når nettet er der. Bare på egen side, aldri i forhåndsvisning.
+  if (egenSide() && "serviceWorker" in navigator) {
+    try {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js").catch(function () {});
+      });
+    } catch (e) { /* ignore */ }
+  }
+  if (kjorerSomApp()) track("apnet_som_app");
 
   // ---------- duellmeny ----------
   // Legger utfordringen i den åpne potten og gir tilbake en id. Feiler det,
