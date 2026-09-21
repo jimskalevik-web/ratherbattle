@@ -1,7 +1,7 @@
 // RatherBattle service worker.
 // Nett først, alltid: spillet skal aldri vise en gammel versjon når det finnes
 // en ny. Lagret kopi brukes bare når telefonen er uten nett.
-const LAGER = "rb-2026-09-21 13:37 · ingen-gjentak+temaer+puls";
+const LAGER = "rb-2026-09-21 14:21 · ingen-gjentak+temaer+puls";
 self.addEventListener("install", (e) => {
   self.skipWaiting();
   e.waitUntil(caches.open(LAGER).then((c) => c.addAll(["/"])).catch(() => {}));
