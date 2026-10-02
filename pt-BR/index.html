@@ -6,7 +6,7 @@
   <title>RatherBattle</title>
   <meta name="description" content="1.000 dilemas, duas opções, zero tempo para pensar. Descubra se você responde como a maioria — ou na contramão. Desafie um amigo e veja o quanto vocês se parecem.">
   <!-- Byggemerke: gjør det mulig å se utenfra hvilken versjon som er publisert. -->
-  <meta name="rb-build" content="2026-10-02 08:35 · ingen-gjentak+temaer+puls">
+  <meta name="rb-build" content="2026-10-02 10:40 · ingen-gjentak+temaer+puls">
   <link rel="canonical" href="https://ratherbattle.com/pt-BR/">
   <link rel="alternate" hreflang="no" href="https://ratherbattle.com/no/">
   <link rel="alternate" hreflang="en" href="https://ratherbattle.com/en/">
@@ -174,6 +174,58 @@
     0%, 100% { box-shadow: 0 0 0 0 rgba(217, 66, 34, 0.45); }
     50% { box-shadow: 0 0 0 7px rgba(217, 66, 34, 0); }
   }
+
+  /* Båndet øverst: «åpne i Chrome» eller «legg appen på hjemskjermen». */
+  .tipsbar {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent-b);
+    color: #f4fffb;
+    border-radius: 14px;
+    padding: 9px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .tipsbar[hidden] { display: none; }
+  .tipsbar .tips-text { flex: 1; min-width: 0; }
+  .tipsbar .tips-btn {
+    flex: none;
+    background: #fff;
+    color: var(--accent-b);
+    border: none;
+    border-radius: 10px;
+    padding: 7px 12px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .tipsbar .tips-btn[hidden] { display: none; }
+  .tipsbar .tips-close {
+    flex: none;
+    background: none;
+    border: none;
+    color: inherit;
+    opacity: 0.75;
+    font-size: 1.1rem;
+    line-height: 1;
+    padding: 0 2px;
+    cursor: pointer;
+  }
+  @media (max-width: 379px) {
+    .tipsbar { font-size: 0.74rem; gap: 7px; padding: 8px 10px; }
+    .tipsbar .tips-btn { padding: 6px 9px; }
+  }
+  /* I mørk drakt er grønnfargen lys, så teksten må være mørk for å leses. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .tipsbar { color: #06231f; }
+    :root:not([data-theme="light"]) .tipsbar .tips-btn { background: #06231f; color: #e9fffa; }
+  }
+  :root[data-theme="dark"] .tipsbar { color: #06231f; }
+  :root[data-theme="dark"] .tipsbar .tips-btn { background: #06231f; color: #e9fffa; }
 
   .duel-banner {
     flex: none;
@@ -852,6 +904,12 @@
   </div>
 </div>
 
+<div class="tipsbar" id="tipsBar" hidden>
+  <span class="tips-text" id="tipsText"></span>
+  <button class="tips-btn" id="tipsAction" type="button" hidden></button>
+  <button class="tips-close" id="tipsClose" type="button" aria-label="x">&#215;</button>
+</div>
+
 <div class="duel-banner" id="duelBanner">
   <span id="duelProgress"></span>
   <button class="quit" id="quitDuel" type="button"></button>
@@ -1008,6 +1066,12 @@ var VDH_UI_NO = {
   install_desc: "Da ligger RatherBattle sammen med de andre appene dine, åpner i fullskjerm og husker hvor du slapp.",
   btn_install: "Installer",
   install_ios: "Trykk på Del-knappen i Safari (firkanten med pil opp), og velg «Legg til på Hjem-skjerm».",
+  tips_innebygd: "Åpne i Chrome for å legge RatherBattle på hjemskjermen.",
+  tips_apne_knapp: "Åpne i Chrome",
+  tips_installer: "Legg RatherBattle på hjemskjermen, så ligger den klar som en app.",
+  tips_installer_ios: "Vil du ha den som app? Trykk Del-knappen i Safari og velg «Legg til på Hjem-skjerm».",
+  tips_kopiert: "Lenken er kopiert. Lim den inn i Safari.",
+  tips_ios_manuelt: "Trykk ⋯ i hjørnet og velg «Åpne i Safari».",
   install_done: "Lagt til på startskjermen ✓",
   card_challenge: "Utfordre en venn",
   challenge_desc: "Send en lenke til noen. De svarer på de samme ti dilemmaene uten å se hva du valgte — så får dere fasiten på hvor like dere er.",
@@ -2157,6 +2221,12 @@ var VDH_UI_EN = {
   install_desc: "RatherBattle then sits with your other apps, opens full screen and remembers where you left off.",
   btn_install: "Install",
   install_ios: "Tap the Share button in Safari (the square with an arrow), then choose “Add to Home Screen”.",
+  tips_innebygd: "Open in Chrome to add RatherBattle to your home screen.",
+  tips_apne_knapp: "Open in Chrome",
+  tips_installer: "Add RatherBattle to your home screen and it opens like an app.",
+  tips_installer_ios: "Want it as an app? Tap the Share button in Safari and choose \"Add to Home Screen\".",
+  tips_kopiert: "Link copied. Paste it into Safari.",
+  tips_ios_manuelt: "Tap ⋯ in the corner and choose \"Open in Safari\".",
   install_done: "Added to your home screen ✓",
   card_challenge: "Challenge a friend",
   challenge_desc: "Send someone a link. They answer the same ten dilemmas without seeing your picks — then you both find out how alike you really are.",
@@ -3396,6 +3466,12 @@ var VDH_UI_ES = {
   install_desc: "Así RatherBattle queda junto a tus otras apps, se abre a pantalla completa y recuerda dónde lo dejaste.",
   btn_install: "Instalar",
   install_ios: "Toca el botón Compartir en Safari (el cuadrado con la flecha) y elige «Añadir a pantalla de inicio».",
+  tips_innebygd: "Ábrelo en Chrome para añadir RatherBattle a la pantalla de inicio.",
+  tips_apne_knapp: "Abrir en Chrome",
+  tips_installer: "Añade RatherBattle a la pantalla de inicio y se abrirá como una app.",
+  tips_installer_ios: "¿La quieres como app? Pulsa Compartir en Safari y elige «Añadir a inicio».",
+  tips_kopiert: "Enlace copiado. Pégalo en Safari.",
+  tips_ios_manuelt: "Pulsa ⋯ en la esquina y elige «Abrir en Safari».",
   install_done: "Añadida a tu pantalla de inicio ✓",
   card_challenge: "Reta a un amigo",
   challenge_desc: "Manda un enlace a alguien. Responden los mismos diez dilemas sin ver lo que elegiste, y así veis cuánto os parecéis de verdad.",
@@ -4635,6 +4711,12 @@ var VDH_UI_DE = {
   install_desc: "Dann liegt RatherBattle neben deinen anderen Apps, öffnet im Vollbild und merkt sich, wo du aufgehört hast.",
   btn_install: "Installieren",
   install_ios: "Tippe in Safari auf Teilen (das Quadrat mit dem Pfeil) und wähle „Zum Home-Bildschirm“.",
+  tips_innebygd: "In Chrome öffnen, um RatherBattle auf den Startbildschirm zu legen.",
+  tips_apne_knapp: "In Chrome öffnen",
+  tips_installer: "Leg RatherBattle auf den Startbildschirm, dann öffnet es wie eine App.",
+  tips_installer_ios: "Als App? Tippe in Safari auf Teilen und wähle „Zum Home-Bildschirm\".",
+  tips_kopiert: "Link kopiert. Füge ihn in Safari ein.",
+  tips_ios_manuelt: "Tippe auf ⋯ in der Ecke und wähle „In Safari öffnen\".",
   install_done: "Zum Home-Bildschirm hinzugefügt ✓",
   card_challenge: "Fordere einen Freund heraus",
   challenge_desc: "Schick jemandem einen Link. Er beantwortet dieselben zehn Dilemmas, ohne deine Wahl zu sehen — danach seht ihr, wie ähnlich ihr wirklich seid.",
@@ -5874,6 +5956,12 @@ var VDH_UI_FR = {
   install_desc: "RatherBattle se range alors avec tes autres apps, s'ouvre en plein écran et se souvient où tu t'es arrêté.",
   btn_install: "Installer",
   install_ios: "Touche le bouton Partager dans Safari (le carré avec la flèche), puis choisis « Sur l'écran d'accueil ».",
+  tips_innebygd: "Ouvre dans Chrome pour ajouter RatherBattle à ton écran d'accueil.",
+  tips_apne_knapp: "Ouvrir dans Chrome",
+  tips_installer: "Ajoute RatherBattle à ton écran d'accueil : il s'ouvre comme une appli.",
+  tips_installer_ios: "En appli ? Appuie sur Partager dans Safari et choisis « Sur l'écran d'accueil ».",
+  tips_kopiert: "Lien copié. Colle-le dans Safari.",
+  tips_ios_manuelt: "Appuie sur ⋯ dans le coin et choisis « Ouvrir dans Safari ».",
   install_done: "Ajoutée à l'écran d'accueil ✓",
   card_challenge: "Défie un ami",
   challenge_desc: "Envoie un lien à quelqu'un. Il répond aux mêmes dix dilemmes sans voir tes choix — ensuite vous voyez à quel point vous vous ressemblez.",
@@ -7113,6 +7201,12 @@ var VDH_UI_PT_BR = {
   install_desc: "Assim o RatherBattle fica junto dos seus outros apps, abre em tela cheia e lembra onde você parou.",
   btn_install: "Instalar",
   install_ios: "Toque no botão Compartilhar do Safari (o quadrado com a seta) e escolha “Adicionar à Tela de Início”.",
+  tips_innebygd: "Abra no Chrome para colocar o RatherBattle na tela inicial.",
+  tips_apne_knapp: "Abrir no Chrome",
+  tips_installer: "Coloque o RatherBattle na tela inicial e ele abre como um app.",
+  tips_installer_ios: "Quer como app? Toque em Compartilhar no Safari e escolha \"Adicionar à Tela de Início\".",
+  tips_kopiert: "Link copiado. Cole no Safari.",
+  tips_ios_manuelt: "Toque em ⋯ no canto e escolha \"Abrir no Safari\".",
   install_done: "Adicionado à tela inicial ✓",
   card_challenge: "Desafie um amigo",
   challenge_desc: "Mande um link para alguém. A pessoa responde os mesmos dez dilemas sem ver suas escolhas — e aí vocês veem o quanto se parecem de verdade.",
@@ -8352,6 +8446,12 @@ var VDH_UI_IT = {
   install_desc: "Così RatherBattle sta insieme alle tue altre app, si apre a schermo intero e ricorda dove eri rimasto.",
   btn_install: "Installa",
   install_ios: "Tocca il pulsante Condividi in Safari (il quadrato con la freccia) e scegli «Aggiungi alla schermata Home».",
+  tips_innebygd: "Apri in Chrome per aggiungere RatherBattle alla schermata Home.",
+  tips_apne_knapp: "Apri in Chrome",
+  tips_installer: "Aggiungi RatherBattle alla schermata Home: si aprirà come un'app.",
+  tips_installer_ios: "La vuoi come app? Tocca Condividi in Safari e scegli «Aggiungi a Home».",
+  tips_kopiert: "Link copiato. Incollalo in Safari.",
+  tips_ios_manuelt: "Tocca ⋯ nell'angolo e scegli «Apri in Safari».",
   install_done: "Aggiunta alla schermata Home ✓",
   card_challenge: "Sfida un amico",
   challenge_desc: "Manda un link a qualcuno. Risponderà agli stessi dieci dilemmi senza vedere le tue scelte, e poi vedrete quanto vi somigliate davvero.",
@@ -9591,6 +9691,12 @@ var VDH_UI_SV = {
   install_desc: "Då ligger RatherBattle bland dina andra appar, öppnas i helskärm och minns var du slutade.",
   btn_install: "Installera",
   install_ios: "Tryck på Dela-knappen i Safari (fyrkanten med pilen) och välj ”Lägg till på hemskärmen”.",
+  tips_innebygd: "Öppna i Chrome för att lägga RatherBattle på hemskärmen.",
+  tips_apne_knapp: "Öppna i Chrome",
+  tips_installer: "Lägg RatherBattle på hemskärmen, så öppnas den som en app.",
+  tips_installer_ios: "Vill du ha den som app? Tryck på Dela i Safari och välj ”Lägg till på hemskärmen”.",
+  tips_kopiert: "Länken är kopierad. Klistra in den i Safari.",
+  tips_ios_manuelt: "Tryck på ⋯ i hörnet och välj ”Öppna i Safari”.",
   install_done: "Tillagd på hemskärmen ✓",
   card_challenge: "Utmana en vän",
   challenge_desc: "Skicka en länk till någon. De svarar på samma tio dilemman utan att se vad du valde — sen får ni facit på hur lika ni är.",
@@ -11419,6 +11525,7 @@ window.VDH_LOCALES["sv"].extra = [
 
   function render() {
     answered = false;
+    if (typeof visTips === "function") visTips();
     var q = QUESTIONS[currentEntry().i];
     labelA.textContent = q[0];
     labelB.textContent = q[1];
@@ -11956,11 +12063,13 @@ window.VDH_LOCALES["sv"].extra = [
     e.preventDefault();
     installHendelse = e;
     if (statsPanel.classList.contains("open")) renderStats();
+    if (typeof visTips === "function") visTips();
   });
   window.addEventListener("appinstalled", function () {
     installert = true;
     installHendelse = null;
     track("installert");
+    if (typeof visTips === "function") visTips();
   });
   // Service worker: holder appen i gang uten nett, men henter alltid nyeste
   // versjon først når nettet er der. Bare på egen side, aldri i forhåndsvisning.
@@ -11972,6 +12081,117 @@ window.VDH_LOCALES["sv"].extra = [
     } catch (e) { /* ignore */ }
   }
   if (kjorerSomApp()) track("apnet_som_app");
+
+  // ---------- båndet øverst ----------
+  // To problemer det løser. Åpner noen lenken inne i Messenger, Instagram
+  // eller Snapchat, sitter de i en innebygd nettleser som ikke kan installere
+  // noe. Og de som er i Chrome, finner ikke installeringen av seg selv når
+  // den ligger i profilen. Båndet sier fra om begge deler, én gang, og lar
+  // seg lukke.
+  var TIPS_KEY = "vdh_tips_v1";
+  var tipsLukket = (function () {
+    try { return localStorage.getItem(TIPS_KEY) === "1"; } catch (e) { return false; }
+  })();
+  var tipsBar = document.getElementById("tipsBar");
+  var tipsText = document.getElementById("tipsText");
+  var tipsAction = document.getElementById("tipsAction");
+  var tipsClose = document.getElementById("tipsClose");
+
+  // Facebook, Instagram, Messenger, Snapchat, TikTok, X og LinkedIn åpner
+  // lenker i sin egen nettleser inni appen.
+  function iAppNettleser() {
+    var ua = navigator.userAgent || "";
+    if (/FBAN|FBAV|FB_IAB|FBIOS|Instagram|Snapchat|TikTok|Twitter|LinkedInApp|Line\//i.test(ua)) return true;
+    // Android-webview uten Chrome-kjennetegn
+    return /\bwv\b/.test(ua) && /Android/i.test(ua);
+  }
+  function erAndroid() { return /Android/i.test(navigator.userAgent || ""); }
+
+  function apneIEgenNettleser() {
+    var u = window.location.href;
+    track("apne_i_nettleser");
+    if (erAndroid()) {
+      // Android forstår intent-lenker: dette åpner Chrome på samme side.
+      var uten = u.replace(/^https?:\/\//, "");
+      window.location.href = "intent://" + uten + "#Intent;scheme=https;package=com.android.chrome;end";
+      return;
+    }
+    // iPhone kan ikke tvinges. Noen innebygde nettlesere godtar denne, resten
+    // får lenken kopiert, så den kan limes inn i Safari.
+    try { window.location.href = "x-safari-" + u; } catch (e) { /* ignore */ }
+    setTimeout(function () {
+      kopier(u, function (ok) {
+        tipsText.textContent = t(ok ? "tips_kopiert" : "tips_ios_manuelt");
+        tipsAction.hidden = true;
+      });
+    }, 700);
+  }
+
+  function kopier(tekst, naar) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(tekst).then(function () { naar(true); }, function () { naar(false); });
+        return;
+      }
+    } catch (e) { /* ignore */ }
+    naar(false);
+  }
+
+  function visTips() {
+    if (!tipsBar) return;
+    if (!egenSide() || kjorerSomApp() || tipsLukket || installert) { tipsBar.hidden = true; return; }
+    // Dagens dilemma er den vanlige åpningsskjermen, så der skal båndet vises.
+    // Under en duell og mens en utfordring bygges, skal ingenting forstyrre.
+    if (mode === "duel" || venterUtfordring) { tipsBar.hidden = true; return; }
+
+    if (iAppNettleser()) {
+      tipsText.textContent = t("tips_innebygd");
+      tipsAction.textContent = t("tips_apne_knapp");
+      tipsAction.hidden = false;
+      tipsBar.hidden = false;
+      return;
+    }
+    // Ikke mas med installering før de har spilt litt.
+    if (history.length < 3) { tipsBar.hidden = true; return; }
+    if (installHendelse) {
+      tipsText.textContent = t("tips_installer");
+      tipsAction.textContent = t("btn_install");
+      tipsAction.hidden = false;
+      tipsBar.hidden = false;
+      return;
+    }
+    if (erIphone()) {
+      tipsText.textContent = t("tips_installer_ios");
+      tipsAction.hidden = true;
+      tipsBar.hidden = false;
+      return;
+    }
+    tipsBar.hidden = true;
+  }
+
+  if (tipsAction) {
+    tipsAction.addEventListener("click", function () {
+      if (iAppNettleser()) { apneIEgenNettleser(); return; }
+      var h = installHendelse;
+      if (!h) return;
+      installHendelse = null;
+      track("installer_trykket_band");
+      try {
+        h.prompt();
+        h.userChoice.then(function (valg) {
+          if (valg && valg.outcome === "accepted") { installert = true; track("installert"); }
+          visTips();
+        }, function () {});
+      } catch (e) { /* ignore */ }
+    });
+  }
+  if (tipsClose) {
+    tipsClose.addEventListener("click", function () {
+      tipsLukket = true;
+      try { localStorage.setItem(TIPS_KEY, "1"); } catch (e) { /* ignore */ }
+      tipsBar.hidden = true;
+    });
+  }
 
   // ---------- duellmeny ----------
   // Legger utfordringen i den åpne potten og gir tilbake en id. Feiler det,
